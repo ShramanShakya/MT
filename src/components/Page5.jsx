@@ -1,10 +1,10 @@
 import { useState } from "react";
 import "./page5.css";
 
-const subject = [
-  { value: "cs", name: "Computer Science" },
-  { value: "ce", name: "Computer Engineering" },
-  { value: "nursing", name: "Nursing" },
+const hobbies = [
+  { value: "music", name: "Music" },
+  { value: "movie", name: "Movies" },
+  { value: "plastic-model", name: "Plastic Model" },
 ];
 
 const genders = [
@@ -13,71 +13,34 @@ const genders = [
   { value: "others", name: "Others" },
 ];
 
-const departments = [
-  {
-    value: "accounting",
-    name: "Accounting",
-    jobs: [
-      { value: "accountant", name: "Accountant" },
-      { value: "auditor", name: "Auditor" },
-      { value: "finance-manager", name: "Finance Manager" },
-    ],
-  },
-  {
-    value: "engineering",
-    name: "Engineering",
-    jobs: [
-      { value: "developer", name: "Developer" },
-      { value: "qa-engineer", name: "QA Engineer" },
-      { value: "devops-engineer", name: "DevOps Engineer" },
-    ],
-  },
-  {
-    value: "sales",
-    name: "Sales",
-    jobs: [
-      { value: "sales-executive", name: "Sales Executive" },
-      { value: "account-manager", name: "Account Manager" },
-    ],
-  },
-  {
-    value: "nursing",
-    name: "Nursing",
-    jobs: [
-      { value: "nurse", name: "Nurse" },
-      { value: "nurse-manager", name: "Nurse Manager" },
-    ],
-  },
-];
+const departments = {
+  IT: ["Developer", "System Analyst", "QA Engineer"],
+  HR: ["Recruiter", "HR Officer"],
+  Finance: ["Accountant", "Financial Analyst"],
+};
 
 const defaultForm = {
   username: "",
   firstname: "",
   lastname: "",
-  gender: "",
-  subject: [],
-  department: "",
-  jobPosition: "",
+  gender: "male",
+  hobbies: [],
+  department: "IT",
+  jobPosition: "Developer",
 };
 
-function Page2() {
+function Page5() {
   const [form, setForm] = useState(defaultForm);
   const [submittedData, setSubmittedData] = useState(null);
-
-  const selectedDepartment = departments.find(
-    (dept) => dept.value === form.department
-  );
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
     if (name === "department") {
-      const dept = departments.find((d) => d.value === value);
-
       setForm({
         ...form,
         department: value,
-        jobPosition: dept ? dept.jobs[0].value : "",
+        jobPosition: departments[value][0],
       });
     } else {
       setForm({
@@ -87,18 +50,18 @@ function Page2() {
     }
   };
 
-  const handleSubjectChange = (e) => {
+  const handleHobbyChange = (e) => {
     const { value, checked } = e.target;
 
     if (checked) {
       setForm({
         ...form,
-        subject: [...form.subject, value],
+        hobbies: [...form.hobbies, value],
       });
     } else {
       setForm({
         ...form,
-        subject: form.subject.filter((sub) => sub !== value),
+        hobbies: form.hobbies.filter((hobby) => hobby !== value),
       });
     }
   };
@@ -169,18 +132,18 @@ function Page2() {
         </div>
 
         <div className="form-row">
-          <label>Subject</label>
+          <label>Hobbies</label>
 
           <div className="options">
-            {subject.map((sub) => (
-              <label key={sub.value}>
+            {hobbies.map((hobby) => (
+              <label key={hobby.value}>
                 <input
                   type="checkbox"
-                  value={sub.value}
-                  checked={form.subject.includes(sub.value)}
-                  onChange={handleSubjectChange}
+                  value={hobby.value}
+                  checked={form.hobbies.includes(hobby.value)}
+                  onChange={handleHobbyChange}
                 />
-                {sub.name}
+                {hobby.name}
               </label>
             ))}
           </div>
@@ -194,11 +157,9 @@ function Page2() {
             value={form.department}
             onChange={handleChange}
           >
-            <option value="">-- Select Department --</option>
-
-            {departments.map((dept) => (
-              <option key={dept.value} value={dept.value}>
-                {dept.name}
+            {Object.keys(departments).map((dept) => (
+              <option key={dept} value={dept}>
+                {dept}
               </option>
             ))}
           </select>
@@ -211,13 +172,10 @@ function Page2() {
             name="jobPosition"
             value={form.jobPosition}
             onChange={handleChange}
-            disabled={!selectedDepartment}
           >
-            <option value="">-- Select Job Position --</option>
-
-            {selectedDepartment?.jobs.map((job) => (
-              <option key={job.value} value={job.value}>
-                {job.name}
+            {departments[form.department].map((job) => (
+              <option key={job} value={job}>
+                {job}
               </option>
             ))}
           </select>
@@ -251,34 +209,21 @@ function Page2() {
           </p>
 
           <p>
-            <strong>Gender:</strong>{" "}
-            {genders.find((g) => g.value === submittedData.gender)?.name}
+            <strong>Gender:</strong> {submittedData.gender}
           </p>
 
           <p>
-            <strong>Department:</strong>{" "}
-            {
-              departments.find((d) => d.value === submittedData.department)
-                ?.name
-            }
+            <strong>Department:</strong> {submittedData.department}
           </p>
 
           <p>
-            <strong>Job Position:</strong>{" "}
-            {departments
-              .find((d) => d.value === submittedData.department)
-              ?.jobs.find((j) => j.value === submittedData.jobPosition)?.name}
+            <strong>Job Position:</strong> {submittedData.jobPosition}
           </p>
 
           <p>
-            <strong>Subject:</strong>{" "}
-            {submittedData.subject.length > 0
-              ? submittedData.subject
-                  .map(
-                    (value) =>
-                      subject.find((s) => s.value === value)?.name
-                  )
-                  .join(", ")
+            <strong>Hobbies:</strong>{" "}
+            {submittedData.hobbies.length > 0
+              ? submittedData.hobbies.join(", ")
               : "None"}
           </p>
         </div>
@@ -287,4 +232,4 @@ function Page2() {
   );
 }
 
-export default Page2;
+export default Page5;

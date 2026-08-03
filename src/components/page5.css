@@ -1,0 +1,108 @@
+.container {
+  width: 95%;
+  margin: 20px auto;
+  border: 1px solid white;
+  background: transparent;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+}
+
+.container h2 {
+  margin: 15px;
+  color: white;
+  font-weight: 600;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid white;
+}
+
+form {
+  padding: 20px;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.form-row > label {
+  width: 170px;
+  font-size: 18px;
+  color: white;
+  font-weight: normal;
+}
+
+.form-row input[type="text"],
+.form-row select {
+  width: 270px;
+  height: 38px;
+  padding: 5px 10px;
+  border: 1px solid white;
+  background: transparent;
+  color: white;
+  font-size: 16px;
+  outline: none;
+}
+
+.form-row input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.options {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.options label {
+  width: auto;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 17px;
+  color: white;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  padding: 25px;
+}
+
+.buttons button {
+  padding: 10px 22px;
+  font-size: 18px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.buttons button:first-child {
+  background: transparent;
+  color: white;
+  border: 1px solid white;
+}
+
+.buttons button:last-child {
+  background: #0d6efd;
+  color: white;
+  border: none;
+}
+
+.result {
+  padding: 20px;
+  border-top: 1px solid white;
+  color: white;
+}
+
+.result h3 {
+  margin-bottom: 15px;
+  color: white;
+}
+
+.result p {
+  margin: 8px 0;
+}
