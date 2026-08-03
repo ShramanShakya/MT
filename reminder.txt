@@ -1,0 +1,14 @@
+npm install react-router-dom
+npm install -D gh-pages
+
+"predeploy": "npm run build",
+"deploy": "gh-pages -d dist"
+that 2 in pckjsn
+
+for hashrouter change vite config file, and make sure gh pages is on ur package.json file in dependencies.
+
+base: '/midterm/',
+name should be your repo name
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
